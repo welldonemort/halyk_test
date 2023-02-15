@@ -33,7 +33,7 @@ export default {
   },
   emits: ["close"],
   setup(props, { emit }) {
-    const emitClose = (e) => {
+    const emitClose = () => {
       emit("close");
     };
 

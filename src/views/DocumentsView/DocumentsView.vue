@@ -11,7 +11,9 @@
 
       <div v-if="state.file">
         <div class="documents__actions">
-          <span class="documents__file-name">{{ state.file.name }}</span>
+          <span class="documents__file-name">
+            {{ state.file?.name || "Без имени" }}
+          </span>
 
           <div @click="reset" class="documents__reset-btn">Сбросить</div>
         </div>
@@ -74,8 +76,8 @@
   </div>
 </template>
 
-<script>
-import { reactive, onBeforeMount, ref, computed } from "vue";
+<script lang="ts">
+import { reactive, onBeforeMount, ref } from "vue";
 import { useDataStore } from "@/stores/data";
 import { useRouter } from "vue-router";
 import TheLoader from "@/components/TheLoader/TheLoader.vue";
@@ -83,12 +85,13 @@ import axios from "axios";
 import TheModal from "@/components/TheModal/TheModal.vue";
 import TheToast from "@/components/TheToast/TheToast.vue";
 import TheHeader from "@/components/TheHeader/TheHeader.vue";
+import type { DocumentListItemT, FileT, StoreDataT } from "@/types";
 
 export default {
   components: { TheHeader, TheToast, TheModal, TheLoader },
   setup() {
     const file = ref(null);
-    const store = useDataStore();
+    const store: StoreDataT = useDataStore();
     const router = useRouter();
 
     const state = reactive({
@@ -97,9 +100,9 @@ export default {
       is_modal_open: false,
       error: "",
       //
-      file: null,
-      current_idx: null,
-      documents: [],
+      file: null as FileT | null,
+      current_idx: null as number | null,
+      documents: [] as DocumentListItemT[],
     });
 
     const getDocuments = () => {
@@ -110,7 +113,7 @@ export default {
           processInstanceId: store.processInstanceId,
         })
         .then((resp) => {
-          state.documents = resp.data.map((document) => ({
+          state.documents = resp.data.map((document: DocumentListItemT) => ({
             ...document,
             file: null,
           }));
@@ -123,7 +126,7 @@ export default {
         });
     };
 
-    const onChooseFile = (idx) => {
+    const onChooseFile = (idx: number) => {
       state.current_idx = idx;
       state.is_modal_open = true;
     };
@@ -133,6 +136,8 @@ export default {
     };
 
     const send = () => {
+      if (state.current_idx === null || !state.file) return;
+
       state.is_loading_send = true;
 
       axios
@@ -168,7 +173,9 @@ export default {
       state.error = "";
     };
 
-    const chooseFile = (e) => {
+    const chooseFile = (e: any) => {
+      if (!e || !e.target) return;
+
       state.file = e.target.files[0];
     };
 

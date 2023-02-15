@@ -4,13 +4,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { useDataStore } from "@/stores/data";
 import { useRouter } from "vue-router";
+import type { StoreDataT } from "@/types";
 
 export default {
   setup() {
-    const store = useDataStore();
+    const store: StoreDataT = useDataStore();
     const router = useRouter();
 
     const logout = () => {

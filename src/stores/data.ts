@@ -33,5 +33,13 @@ export const useDataStore = defineStore("data", () => {
     localStorage.clear();
   };
 
-  return { setUser, resetUser, accessToken, baseUrl, processInstanceId };
+  return {
+    accessToken,
+    refreshToken,
+    baseUrl,
+    processInstanceId,
+    //
+    setUser,
+    resetUser,
+  };
 });

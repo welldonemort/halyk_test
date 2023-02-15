@@ -33,17 +33,18 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import axios from "axios";
 import { computed, reactive, onMounted } from "vue";
 import TheToast from "@/components/TheToast/TheToast.vue";
 import { useDataStore } from "@/stores/data";
 import { useRouter } from "vue-router";
+import type { StoreDataT } from "@/types";
 
 export default {
   components: { TheToast },
   setup() {
-    const store = useDataStore();
+    const store: StoreDataT = useDataStore();
     const router = useRouter();
 
     const state = reactive({
@@ -58,7 +59,7 @@ export default {
       state.error = "";
     };
 
-    const login = (e) => {
+    const login = (e: Event) => {
       e.preventDefault();
       state.is_loading = true;
 
