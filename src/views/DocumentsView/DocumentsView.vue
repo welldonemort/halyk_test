@@ -85,7 +85,7 @@ import axios from "axios";
 import TheModal from "@/components/TheModal/TheModal.vue";
 import TheToast from "@/components/TheToast/TheToast.vue";
 import TheHeader from "@/components/TheHeader/TheHeader.vue";
-import type { DocumentListItemT, FileT, StoreDataT, FileRefT } from "@/types";
+import type { DocumentListItemT, FileT, StoreDataT } from "@/types";
 
 export default {
   components: { TheHeader, TheToast, TheModal, TheLoader },
