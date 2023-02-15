@@ -31,7 +31,7 @@
       <div
         v-else
         class="documents__choose-btn"
-        @click="() => $refs?.file?.click()"
+        @click="() => $refs.file.click()"
       >
         Выбрать файл
         <input
@@ -85,12 +85,12 @@ import axios from "axios";
 import TheModal from "@/components/TheModal/TheModal.vue";
 import TheToast from "@/components/TheToast/TheToast.vue";
 import TheHeader from "@/components/TheHeader/TheHeader.vue";
-import type { DocumentListItemT, FileT, StoreDataT } from "@/types";
+import type { DocumentListItemT, FileT, StoreDataT, FileRefT } from "@/types";
 
 export default {
   components: { TheHeader, TheToast, TheModal, TheLoader },
   setup() {
-    const file = ref(null);
+    const file: any = ref(null);
     const store: StoreDataT = useDataStore();
     const router = useRouter();
 
