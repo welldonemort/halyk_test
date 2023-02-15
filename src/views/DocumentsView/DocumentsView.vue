@@ -28,11 +28,7 @@
           {{ state.is_loading_send ? "Загрузка..." : "Отправить" }}
         </div>
       </div>
-      <div
-        v-else
-        class="documents__choose-btn"
-        @click="() => $refs.file.click()"
-      >
+      <div v-else class="documents__choose-btn" @click="onSelect">
         Выбрать файл
         <input
           type="file"
@@ -186,6 +182,10 @@ export default {
       state.is_modal_open = false;
     };
 
+    const onSelect = () => {
+      file.value.click();
+    };
+
     onBeforeMount(() => {
       if (!store.accessToken) router.push("/auth");
       else getDocuments();
@@ -200,6 +200,7 @@ export default {
       reset,
       send,
       closeToast,
+      onSelect,
     };
   },
 };
