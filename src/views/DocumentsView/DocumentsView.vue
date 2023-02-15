@@ -31,7 +31,7 @@
       <div
         v-else
         class="documents__choose-btn"
-        @click="() => $refs.file.click()"
+        @click="() => $refs?.file?.click()"
       >
         Выбрать файл
         <input
