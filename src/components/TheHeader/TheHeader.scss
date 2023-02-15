@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  justify-content: right;
+  background: #fff;
+  margin-bottom: 30px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0 0 8px;
+
+  &__btn {
+    padding: 5px 10px;
+    background: #009c74;
+    border-radius: 2px;
+    color: #fff;
+    width: fit-content;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.7;
+    }
+  }
+}
