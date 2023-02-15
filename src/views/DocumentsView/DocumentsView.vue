@@ -136,18 +136,22 @@ export default {
       state.is_loading_send = true;
 
       axios
-        .post(`${store.baseUrl}/arm/api/File/UploadFiles`, {
-          file: state.file,
-          fileData: [
-            {
-              processInstanceId:
-                state.documents[state.current_idx].processInstanceId,
-              fileTypeCode: "7",
-              page: "1",
-              fileName: state.file.name,
-            },
-          ],
-        })
+        .post(
+          `${store.baseUrl}/arm/api/File/UploadFiles`,
+          {
+            file: state.file,
+            fileData: [
+              {
+                processInstanceId:
+                  state.documents[state.current_idx].processInstanceId,
+                fileTypeCode: "7",
+                page: "1",
+                fileName: state.file.name,
+              },
+            ],
+          },
+          { headers: { "Content-Type": "multipart/form-data" } }
+        )
         .then(() => {
           closeModal();
           getDocuments();
